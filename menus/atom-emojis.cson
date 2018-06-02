@@ -16,6 +16,10 @@
           'label': 'Toggle'
           'command': 'atom-emojis:toggle'
         }
+        {
+          'label': 'Replace'
+          'command': 'atom-emojis:replace'
+        }
       ]
     ]
   }
