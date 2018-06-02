@@ -9,6 +9,9 @@ class AtomEmojisView
     atom.workspace.observeTextEditors (editor) ->
       editor.onDidChangeCursorPosition (evt) ->
         {cursor} = evt
+        if !cursor
+          console.log 'WTF no cursor?'
+          return
         if cursor.isInsideWord ({wordRegex: EMOJI_REG})
           emoji = editor.getWordUnderCursor({wordRegex: EMOJI_REG})
           fpath = emojsTable[emoji]
