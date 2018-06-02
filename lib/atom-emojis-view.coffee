@@ -23,12 +23,12 @@ class AtomEmojisView
         if !gs
           gs = editor.addGutter {name: 'Emojis'}
         {cursor} = evt
-        if !cursor
+        if !cursor || cursor == undefined
           console.log 'WTF no cursor?'
           return
         if cursor.isInsideWord ({wordRegex: EMOJI_REG})
           emoji = editor.getWordUnderCursor({wordRegex: EMOJI_REG})
-          addEmoji emoji, gs
+          addEmoji emoji, gs, cursor
         if cursor.isInsideWord ({wordRegex: EMOJI_NAME})
           emoji = editor.getWordUnderCursor({wordRegex: EMOJI_NAME})
           emojis = emoji.match(EMOJI_NAME)[0]
