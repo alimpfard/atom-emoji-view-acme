@@ -10,7 +10,7 @@ module.exports = AtomEmojis =
   provide: ->
     if !@atomEmojisView
       @activate null
-    console.log 'Providing shit'
+    console.log 'Providing completion for emojis'
     return @atomEmojisView.emojiCompletion()
 
   activate: (state) ->

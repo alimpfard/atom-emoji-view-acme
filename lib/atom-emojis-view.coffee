@@ -80,7 +80,7 @@ class AtomEmojisView
       # `excludeLowerPriority` will suppress any providers with a lower priority
       # i.e. The default provider will be suppressed
       inclusionPriority: 1
-      excludeLowerPriority: true
+      excludeLowerPriority: false
 
       # This will be suggested before the default provider, which has a suggestionPriority of 1.
       suggestionPriority: 2
@@ -93,17 +93,9 @@ class AtomEmojisView
         matching = []
         text = editor.getTextInBufferRange([[bufferPosition.row, 0], bufferPosition])
         text = text.match(/\\N\{([\w ]*)/)?[1] or ''
-        if text
-          matching = Object.entries(repls).filter((v) -> v[1].startsWith(text))
-        console.log [text, matching]
         new Promise (resolve) ->
-          resolve(matching.map((f) -> {text: f[1], leftLabelHTML: '<img src="X">'.replace('X', path.join(__dirname, emojsTable[f[0]])), description: f[0]}))
+          if text
+            matching = Object.entries(repls).filter((v) -> v[1].startsWith(text))
+          resolve(matching.map((f) -> {text: f[1] + '}', leftLabelHTML: '<img src="X">'.replace('X', path.join(__dirname, emojsTable[f[0]])), description: f[0]}))
 
-      # (optional): called _after_ the suggestion `replacementPrefix` is replaced
-      # by the suggestion `text` in the buffer
-      onDidInsertSuggestion: ({editor, triggerPosition, suggestion}) ->
-
-      # (optional): called when your provider needs to be cleaned up. Unsubscribe
-      # from things, kill any processes, etc.
-      dispose: ->
     return r
