@@ -7,6 +7,11 @@ module.exports = AtomEmojis =
   atomEmojisView: null
   modalPanel: null
   subscriptions: null
+  provide: ->
+    if !@atomEmojisView
+      @activate null
+    console.log 'Providing shit'
+    return @atomEmojisView.emojiCompletion()
 
   activate: (state) ->
     table = JSON.parse(fs.readFileSync(path.join __dirname, 'res.json'))
