@@ -19,5 +19,7 @@
       }
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "emoji-regex": "6.5.1"
+  }
 }
